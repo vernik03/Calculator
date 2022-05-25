@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧮</title>
+</head>
+<style>
+    
+:root {
+  --background: #1D2121;
+  --numbers: #393939;
+  --signs: #525252;
+  --blue: #0D99FF;
+  --text: #DEDEDE;
+  --border-radius: 10px;
+}
+
+body{
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.calc {
+    margin: 50px auto;
+    width: 312px;
+    height: 493px;
+    border-radius: var(--border-radius);
+    background: var(--background);
+    color: var(--text);
+    font-family: Roboto;
+    padding: 9px;
+    box-shadow: 0px 7.71389px 33.6606px rgba(29, 33, 33, 0.46);
+    margin-bottom: 10px;
+}
+
+.calc-screen {
+    height: 65px;
+    padding: 20px;    
+    display: grid;
+    align-items: center;    
+    margin-bottom: 7px;
+    overflow: hidden;
+}
+
+.calc-screen p {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 42px;
+    text-align: right;
+    line-height: 50px;
+    margin: 0;
+}
+
+.buttons {
+    display: grid;
+    grid-template-areas: 
+    "c degree root division"
+    "seven eigth nine multi"
+    "four five six minus"
+    "one two three plus"
+    "plus-minus zero dot equal";
+    grid-gap: 7px;
+    justify-items: center;
+}
+
+.btn {
+    width: 70px;
+    height: 70px;
+    background: var(--numbers);
+    border-radius: var(--border-radius);
+    text-align: center;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 70px;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.1s;
+}
+.btn.degree {
+    line-height: 55px;
+}
+
+
+.btn.bg-signs:hover {
+    background: var(--numbers);
+}
+
+.btn.bg-numbers:hover {
+    background: var(--signs);
+}
+
+.btn.equal:hover {
+    background: var(--text);
+    color: var(--blue);
+}
+
+.btn:active {
+     filter: brightness(70%); 
+}
+
+.btn.bg-numbers {
+    background: var(--numbers);
+}
+
+.btn.bg-signs {
+    background: var(--signs);
+}
+
+.btn.bg-blue {
+    background: var(--blue);
+}
+
+.for-text{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.creator{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 20px;
+    color: var(--text);
+    text-align: right;
+    text-decoration: none;
+    transition: 0.1s;
+}
+
+.creator:hover{
+    color: var(--blue);
+}
+</style>
+<body>
+    <div class="for-text">
+        <a class="creator" href="http://vernik03.atwebpages.com/">by vernik03</a>
+    </div>
+    <div class="calc">
+        <div class="calc-screen">
+            <p>0</p>
+        </div>
+        <div class="buttons">
+            <div class="btn c bg-signs">С</div>            
+            <div class="btn degree bg-signs">x<sup>y</sup></div>
+            <div class="btn root bg-signs">√</div>
+            <div class="btn division bg-signs">÷</div>
+
+            <div class="btn seven bg-numbers">7</div>
+            <div class="btn eigth bg-numbers">8</div>
+            <div class="btn nine bg-numbers">9</div>
+            <div class="btn myltiply bg-signs">×</div>
+
+            <div class="btn four bg-numbers">4</div>
+            <div class="btn five bg-numbers">5</div>
+            <div class="btn six bg-numbers">6</div>
+            <div class="btn minus bg-signs">-</div>
+
+            <div class="btn one bg-numbers">1</div>
+            <div class="btn two bg-numbers">2</div>
+            <div class="btn three bg-numbers">3</div>
+            <div class="btn plus bg-signs">+</div>
+
+            <div class="btn plus-minus bg-numbers">±</div>
+            <div class="btn zero bg-numbers">0</div>
+            <div class="btn dot bg-numbers">.</div>
+            <div class="btn equal bg-blue">=</div>
+        </div>
+    </div>
+    
+    
+</body>
+<script>
+    let a = ''; 
+    let b = ''; 
+    let sign = ''; 
+    let finish  = false;
+
+    const digit = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
+    const action = ['-', '+', '×', '÷', 'xy'];
+
+    const out = document.querySelector('.calc-screen p');
+
+    function clearAll () {
+        a = ''; 
+        b = ''; 
+        sign = ''; 
+        finish = false;
+        out.textContent = 0;
+    }
+
+    function root () {
+        a = Math.sqrt(a);
+        finish = true;
+        out.textContent = Math.trunc(a * 100000000) / 100000000;
+    }
+
+    function plus_minus () {
+        if (b ==='' && sign === '') {
+            let temp = '-'; 
+            temp += a;
+            a = temp;
+            out.textContent = a.toFixed(10);
+        }
+        else if (a!=='' && sign === '') {
+            b += '-';
+            out.textContent = b;
+        }
+        else {
+            let temp = '-'; 
+            temp += b;
+            b = temp;
+            out.textContent = b;
+        }
+    }
+
+    document.querySelector('.c').onclick = clearAll;
+    document.querySelector('.root').onclick = root;
+    document.querySelector('.plus-minus').onclick = plus_minus;
+
+    document.querySelector('.buttons').onclick = (event) => {
+        if(!event.target.classList.contains('btn')) return;
+        if(event.target.classList.contains('c')) return;
+        if(event.target.classList.contains('root')) return;
+        if(event.target.classList.contains('plus-minus')) return;
+
+        out.textContent = '';
+        const key = event.target.textContent;
+
+        if (digit.includes(key)) {
+            if (b ==='' && sign === '') {
+                if(finish){
+                    a = '';
+                    finish = false;
+                }
+                a += key;
+                out.textContent = a;
+            }
+            else if (a!=='' && finish) {
+                b += key;
+                finish = false;
+                out.textContent = b;
+            }
+            else {
+                b += key;
+                out.textContent = b;
+            }
+            console.table(a, b , sign);
+            return;
+        }
+
+        
+        if (action.includes(key) || key === '=') {
+            if(sign === ''){
+            sign = key;
+            if(sign === "xy"){
+                out.textContent = "^";
+            }
+            else {
+                out.textContent = sign;
+            }        
+            console.table(a, b , sign);
+            return;
+            }
+            else {
+                if (b ==='') b = a;
+                switch (sign) {
+                    case "+":
+                        a = (+a) + (+b);
+                        break;
+                    case "-":
+                        a = a - b;
+                        break;
+                    case "×":
+                        a = a * b;
+                        break;
+                    case "÷":
+                        if (b === '0') {
+                            out.textContent = '😵';
+                            a = '';
+                            b = '';
+                            sign = '';
+                            return;
+                        }
+                        a = a / b;
+                        break;
+                    case "xy":
+                        a = Math.pow((+a),(+b)) ;
+                        break;
+                }
+                finish = true;
+                if(key === '='){
+                    sign = '';
+                }
+                b = '';
+                out.textContent = Math.trunc(a * 100000000) / 100000000;
+                console.table(a, b , sign);
+            }
+        }
+    }
+</script>
+</html>
