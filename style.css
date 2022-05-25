@@ -1,0 +1,126 @@
+:root {
+    --background: #1D2121;
+    --numbers: #393939;
+    --signs: #525252;
+    --blue: #0D99FF;
+    --text: #DEDEDE;
+    --border-radius: 10px;
+  }
+  
+  body{
+      display: flex;
+      flex-direction: column-reverse;
+  }
+  
+  .calc {
+      margin: 50px auto;
+      width: 312px;
+      height: 493px;
+      border-radius: var(--border-radius);
+      background: var(--background);
+      color: var(--text);
+      font-family: Roboto;
+      padding: 9px;
+      box-shadow: 0px 7.71389px 33.6606px rgba(29, 33, 33, 0.46);
+      margin-bottom: 10px;
+  }
+  
+  .calc-screen {
+      height: 65px;
+      padding: 20px;    
+      display: grid;
+      align-items: center;    
+      margin-bottom: 7px;
+      overflow: hidden;
+  }
+  
+  .calc-screen p {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 42px;
+      text-align: right;
+      line-height: 50px;
+      margin: 0;
+  }
+  
+  .buttons {
+      display: grid;
+      grid-template-areas: 
+      "c degree root division"
+      "seven eigth nine multi"
+      "four five six minus"
+      "one two three plus"
+      "plus-minus zero dot equal";
+      grid-gap: 7px;
+      justify-items: center;
+  }
+  
+  .btn {
+      width: 70px;
+      height: 70px;
+      background: var(--numbers);
+      border-radius: var(--border-radius);
+      text-align: center;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 70px;
+      cursor: pointer;
+      user-select: none;
+      transition: 0.1s;
+  }
+  .btn.degree {
+      line-height: 55px;
+  }
+  
+  
+  .btn.bg-signs:hover {
+      background: var(--numbers);
+  }
+  
+  .btn.bg-numbers:hover {
+      background: var(--signs);
+  }
+  
+  .btn.equal:hover {
+      background: var(--text);
+      color: var(--blue);
+  }
+  
+  .btn:active {
+       filter: brightness(70%); 
+  }
+  
+  .btn.bg-numbers {
+      background: var(--numbers);
+  }
+  
+  .btn.bg-signs {
+      background: var(--signs);
+  }
+  
+  .btn.bg-blue {
+      background: var(--blue);
+  }
+  
+  .for-text{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+  }
+  
+  .creator{
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 20px;
+      color: var(--text);
+      text-align: right;
+      text-decoration: none;
+      transition: 0.1s;
+  }
+  
+  .creator:hover{
+      color: var(--blue);
+  }
