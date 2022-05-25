@@ -19,7 +19,7 @@ function clearAll () {
 function root () {
     a = Math.sqrt(a);
     finish = true;
-    out.textContent = Math.trunc(a * 100000000) / 100000000;
+    out.textContent = a.toLocaleString('en-EN', { minimumFractionDigits: 0, maximumFractionDigits: 10 });
 }
 
 function plus_minus () {
@@ -27,7 +27,7 @@ function plus_minus () {
         let temp = '-'; 
         temp += a;
         a = temp;
-        out.textContent = a.toFixed(10);
+        out.textContent = a.toLocaleString('en-EN', { minimumFractionDigits: 0, maximumFractionDigits: 10 });
     }
     else if (a!=='' && sign === '') {
         b += '-';
@@ -120,7 +120,7 @@ document.querySelector('.buttons').onclick = (event) => {
                 sign = '';
             }
             b = '';
-            out.textContent = Math.trunc(a * 100000000) / 100000000;
+            out.textContent = a.toLocaleString('en-EN', { minimumFractionDigits: 0, maximumFractionDigits: 10 });
             console.table(a, b , sign);
         }
     }
